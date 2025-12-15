@@ -16,4 +16,4 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["gaugefixer_acordero"] 
+packages = ["gaugefixer"] 
