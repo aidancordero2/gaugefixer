@@ -57,7 +57,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: GaugeFixer - Daily Tests
-          body: At least one of the in the "Daily Tests" workflow has failed. Please check the logs for more details at https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          body: At least one of the tests in the "Daily Tests" workflow has failed. Please check the logs for more details at https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           to: ${{ secrets.MAIL_RECIPIENT }}
           from: GitHub Actions
           
