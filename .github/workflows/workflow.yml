@@ -78,7 +78,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: python-package-distributions-${{ matrix.python-version }}
-        path: dist/
+        path: dist_workflow/
 
   publish-to-pypi:
     name: >-
@@ -101,7 +101,7 @@ jobs:
         with:
           pattern: python-package-distributions-*
           merge-multiple: true
-          path: dist/
+          path: dist_workflow/
       - name: Publish dist to PyPI
         if: github.ref_type == 'tag' && startsWith(github.ref_name, 'v')
         uses: pypa/gh-action-pypi-publish@release/v1
@@ -127,7 +127,7 @@ jobs:
       with:
         pattern: python-package-distributions-*
         merge-multiple: true
-        path: dist/
+        path: dist_workflow/
     - name: Publish dist to TestPyPI
       if: github.ref_type == 'tag' && startsWith(github.ref_name, 'test')
       uses: pypa/gh-action-pypi-publish@release/v1
@@ -157,13 +157,13 @@ jobs:
         with:
           pattern: python-package-distributions-*
           merge-multiple: true
-          path: dist/
+          path: dist_workflow/
       - name: Sign the dists with Sigstore
         uses: sigstore/gh-action-sigstore-python@v3.0.0
         with:
           inputs: >-
-            ./dist/*.tar.gz
-            ./dist/*.whl
+            ./dist_workflow/*.tar.gz
+            ./dist_workflow/*.whl
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -186,7 +186,7 @@ jobs:
         # sigstore-produced signatures and certificates.
         run: >-
           gh release upload
-          "$GITHUB_REF_NAME" dist/**
+          "$GITHUB_REF_NAME" dist_workflow/**
           --repo "$GITHUB_REPOSITORY"
           
 
